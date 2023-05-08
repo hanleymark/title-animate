@@ -4,11 +4,11 @@
 :root {
   font-family: 'Red Hat Mono', monospace;
   font-size: 48px;
-  /* Animation speed */
-  --tick: 100ms;
-  /* Space between letters in 'ch' units */
+  --tick: 500ms;
   --letter-spacing: 0.5ch;
   --letter-width: 1ch;
+  /* Number of letters - overridden in js */
+  --number-of-letters: 10;
   --background-col: #555;
   --foreground-col: #fff;
 }
@@ -32,7 +32,7 @@ html {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.mask2 {
+.mask {
   position: absolute;
   margin-top: -0.19rem;
   width: calc(11ch + (var(--letter-spacing) * 10));
@@ -41,56 +41,34 @@ html {
   z-index: 1;
 }
 
-.letter-container {
+.title-container {
   margin: 0;
   padding: 0;
   /* letter-spacing: var(--letter-spacing); */
   user-select: none;
-  border: 1px solid white;
+  overflow: hidden;
 }
 
 .letter {
   display: inline-block;
   transform: translateY(65%);
-  border: 1px solid red;
-}
-
-span {
-  width: 0;
 }
 
 .invisible {
   opacity: 0;
 }
 
-/* .letter:nth-child(4n-3) {
-  color: red;
-}
-
-.letter:nth-child(4n-2) {
-  color: blue;
-}
-
-.letter:nth-child(4n-1) {
-  color: lightgreen;
-}
-
-.letter:nth-child(4n) {
-  color: yellow;
-} */
-
-
 .underline {
   color: white;
   display: inline-block;
-  transform: translateX(calc(-12ch - (var(--letter-spacing) * 11)));
-  animation: slide calc(var(--tick) * 12.5) forwards linear;
+  transform: translateX(calc(var(--number-of-letters) * var(--letter-width) * -1));
+  animation: slide calc(calc(var(--number-of-letters)) * var(--tick)) forwards linear;
   animation-delay: var(--tick);
 }
 
 @keyframes slide {
   from {
-    transform: translateX(calc(-12ch - (var(--letter-spacing) * 11)));
+    transform: translateX(calc(var(--number-of-letters) * (var(--letter-width)+1) * -1));
   }
 
   to {
@@ -107,6 +85,29 @@ span {
     transform: translateY(0);
   }
 }
+
+
+/*
+.letter:nth-child(even) {
+  background-color: #aaa;
+}
+
+.letter:nth-child(odd) {
+  background-color: #888;
+}
+/*
+/*
+.letter:nth-child(4n-2) {
+  color: blue;
+}
+
+.letter:nth-child(4n-1) {
+  color: lightgreen;
+}
+
+.letter:nth-child(4n) {
+  color: yellow;
+} */
 
 html {
   visibility: visible;
