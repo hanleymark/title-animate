@@ -3,10 +3,12 @@
 
 :root {
   font-family: 'Red Hat Mono', monospace;
-  font-size: 48px;
-  --tick: 500ms;
+  font-size: 36px;
+  --tick: 100ms;
+  --rise-duration: 500ms;
   --letter-spacing: 0.5ch;
   --letter-width: 1ch;
+  --letter-gap: 0.2ch;
   /* Number of letters - overridden in js */
   --number-of-letters: 10;
   --background-col: #555;
@@ -50,6 +52,7 @@ html {
 }
 
 .letter {
+  letter-spacing: var(--letter-spacing);
   display: inline-block;
   transform: translateY(65%);
 }
@@ -61,14 +64,14 @@ html {
 .underline {
   color: white;
   display: inline-block;
-  transform: translateX(calc(var(--number-of-letters) * var(--letter-width) * -1));
+  transform: translateX(calc(var(--number-of-letters) * (var(--letter-width) + var(--letter-spacing)) * -1));
   animation: slide calc(calc(var(--number-of-letters)) * var(--tick)) forwards linear;
   animation-delay: var(--tick);
 }
 
 @keyframes slide {
   from {
-    transform: translateX(calc(var(--number-of-letters) * (var(--letter-width)+1) * -1));
+    transform: translateX(calc(var(--number-of-letters) * (var(--letter-width) + var(--letter-spacing)) * -1));
   }
 
   to {

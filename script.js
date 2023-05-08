@@ -12,7 +12,7 @@ let rule = "";
 letters.map((l, i) => {
   rule += `.letter:nth-child(${i + 1})`;
   rule += "{";
-  rule += "animation: rise 0.5s forwards ease-in-out;";
+  rule += "animation: rise var(--rise-duration) forwards ease-in-out;";
   rule += `animation-delay: calc(var(--tick) * ${i + 1});`;
   rule += "}";
 });
@@ -24,7 +24,7 @@ function addTitleToPage(title, element) {
   for (letter of title) {
     const span = document.createElement("span");
     span.classList.add("letter");
-    span.innerText = (letter === " ") ? "_" : letter;
+    span.innerHTML = (letter === " ") ? "&nbsp;" : letter;
     element.appendChild(span);
   }
   const underline = document.createElement("span");
